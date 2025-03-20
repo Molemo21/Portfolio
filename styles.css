@@ -6,23 +6,99 @@
   text-decoration: none;
   scroll-behavior: smooth;
   list-style: none;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 :root {
+  /* Light Theme Colors */
   --primary-color: #009dff;
   --secondary-color: #ff00ff;
   --dark-color: #121212;
   --light-color: #f8f9fa;
   --text-color: #333;
+  --bg-color: #ffffff;
+  --card-bg: #ffffff;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --footer-bg: #121212;
+  --footer-text: #ffffff;
   --gradient: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --box-shadow: 0 5px 15px var(--shadow-color);
   --transition: all 0.3s ease-in-out;
+}
+
+/* Dark Theme Colors */
+.dark {
+  --primary-color: #00b3ff;
+  --secondary-color: #ff33ff;
+  --dark-color: #f8f9fa;
+  --light-color: #121212;
+  --text-color: #e0e0e0;
+  --bg-color: #1a1a1a;
+  --card-bg: #252525;
+  --border-color: #444;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --footer-bg: #0a0a0a;
+  --footer-text: #e0e0e0;
 }
 
 body {
   color: var(--text-color);
-  background-color: var(--light-color);
+  background-color: var(--bg-color);
   overflow-x: hidden;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle i {
+  position: absolute;
+  transition: var(--transition);
+}
+
+.theme-toggle .fa-sun {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.theme-toggle .fa-moon {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dark .theme-toggle .fa-sun {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dark .theme-toggle .fa-moon {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* Custom Cursor */
@@ -214,7 +290,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--light-color);
+  background-color: var(--bg-color);
 }
 
 .about .about-container {
@@ -272,6 +348,7 @@ section {
   font-size: 1.8rem;
   font-weight: 500;
   opacity: 0.8;
+  color: var(--text-color);
 }
 
 .info-box h1 {
@@ -311,6 +388,7 @@ section {
   font-weight: 500;
   position: relative;
   display: inline-block;
+  color: var(--text-color);
 }
 
 .typing-text::after {
@@ -328,7 +406,7 @@ section {
 .bio {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #555;
+  color: var(--text-color);
 }
 
 .btn-group {
@@ -355,9 +433,9 @@ section {
 
 .btn:hover {
   background-color: var(--dark-color);
-  color: white;
+  color: var(--light-color);
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .download-btn {
@@ -408,6 +486,7 @@ section {
   display: inline-block;
   left: 50%;
   transform: translateX(-50%);
+  color: var(--text-color);
 }
 
 .section-title::after {
@@ -424,7 +503,7 @@ section {
 
 /* Experience Section */
 .experience {
-  background-color: #f9f9f9;
+  background-color: var(--bg-color);
   position: relative;
 }
 
@@ -497,21 +576,23 @@ section {
 
 .timeline-content {
   padding: 20px;
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   transition: var(--transition);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
 }
 
 .timeline-content:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px var(--shadow-color);
 }
 
 .timeline-content h3 {
   font-size: 1.5rem;
   margin-bottom: 5px;
-  color: var(--dark-color);
+  color: var(--text-color);
 }
 
 .timeline-content h4 {
@@ -533,7 +614,7 @@ section {
 
 /* Skills Section */
 .skills {
-  background-color: white;
+  background-color: var(--bg-color);
 }
 
 .skills-container {
@@ -556,6 +637,7 @@ section {
   display: inline-block;
   left: 50%;
   transform: translateX(-50%);
+  color: var(--text-color);
 }
 
 .skills-category h3::after {
@@ -576,7 +658,7 @@ section {
 }
 
 .skill-item {
-  background: white;
+  background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
@@ -585,11 +667,12 @@ section {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  border: 1px solid var(--border-color);
 }
 
 .skill-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px var(--shadow-color);
 }
 
 .skill-item i {
@@ -600,12 +683,13 @@ section {
 .skill-item span {
   font-size: 1.2rem;
   font-weight: 500;
+  color: var(--text-color);
 }
 
 .skill-progress {
   width: 100%;
   height: 8px;
-  background-color: #eee;
+  background-color: var(--border-color);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -625,7 +709,7 @@ section {
 
 .soft-skill {
   padding: 0.8rem 1.5rem;
-  background: white;
+  background: var(--card-bg);
   border-radius: 30px;
   box-shadow: var(--box-shadow);
   transition: var(--transition);
@@ -642,7 +726,7 @@ section {
 
 /* Projects Section */
 .projects {
-  background-color: #f9f9f9;
+  background-color: var(--bg-color);
 }
 
 .projects-grid {
@@ -652,16 +736,17 @@ section {
 }
 
 .project-card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 15px;
   overflow: hidden;
   box-shadow: var(--box-shadow);
   transition: var(--transition);
+  border: 1px solid var(--border-color);
 }
 
 .project-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 30px var(--shadow-color);
 }
 
 .project-img {
@@ -688,12 +773,12 @@ section {
 .project-info h3 {
   font-size: 1.5rem;
   margin-bottom: 0.8rem;
-  color: var(--dark-color);
+  color: var(--text-color);
 }
 
 .project-info p {
   margin-bottom: 1.2rem;
-  color: #666;
+  color: var(--text-color);
   line-height: 1.6;
 }
 
@@ -706,7 +791,7 @@ section {
 
 .project-tech span {
   padding: 0.3rem 0.8rem;
-  background: #f0f0f0;
+  background: var(--border-color);
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 500;
@@ -724,7 +809,7 @@ section {
 
 /* Contact Section */
 .contact {
-  background-color: white;
+  background-color: var(--bg-color);
 }
 
 .contact-container {
@@ -749,15 +834,16 @@ section {
   align-items: center;
   gap: 1.5rem;
   padding: 1.5rem;
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   transition: var(--transition);
+  border: 1px solid var(--border-color);
 }
 
 .contact-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px var(--shadow-color);
 }
 
 .contact-item i {
@@ -768,15 +854,21 @@ section {
 .contact-item h3 {
   font-size: 1.2rem;
   margin-bottom: 0.3rem;
+  color: var(--text-color);
+}
+
+.contact-item p {
+  color: var(--text-color);
 }
 
 .contact-form {
   flex: 1;
   min-width: 300px;
-  background: white;
+  background: var(--card-bg);
   padding: 2rem;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
 }
 
 .form-group {
@@ -787,10 +879,12 @@ section {
 .form-group textarea {
   width: 100%;
   padding: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   font-size: 1rem;
   transition: var(--transition);
+  background-color: var(--card-bg);
+  color: var(--text-color);
 }
 
 .form-group textarea {
@@ -825,13 +919,13 @@ section {
 .submit-btn:hover {
   background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 /* Footer */
 footer {
-  background-color: var(--dark-color);
-  color: white;
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
   padding: 3rem 10% 1.5rem;
 }
 
@@ -904,7 +998,7 @@ footer {
   visibility: hidden;
   transition: var(--transition);
   z-index: 999;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .scroll-top.active {
@@ -969,7 +1063,7 @@ footer {
     font-size: 1rem;
   }
   
-  header .visit-btn {
+  .header-actions .visit-btn {
     display: none;
   }
   
@@ -1097,5 +1191,9 @@ footer {
   .footer-links {
     flex-wrap: wrap;
     justify-content: center;
+  }
+  
+  .theme-toggle {
+    margin-right: 0.5rem;
   }
 }

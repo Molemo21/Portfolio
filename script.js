@@ -1,4 +1,54 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Theme Toggle
+  const themeToggle = document.getElementById("theme-toggle");
+  const htmlElement = document.documentElement;
+  
+  // Check for saved theme preference or use preferred color scheme
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    htmlElement.classList.add(savedTheme);
+  } else {
+    // Check if user prefers dark mode
+    const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (prefersDarkMode) {
+      htmlElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+  }
+  
+  // Update button icon based on current theme
+  updateThemeToggleIcon();
+  
+  // Toggle theme when button is clicked
+  themeToggle.addEventListener("click", function() {
+    if (htmlElement.classList.contains("dark")) {
+      htmlElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      htmlElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+    updateThemeToggleIcon();
+  });
+  
+  function updateThemeToggleIcon() {
+    const isDarkMode = htmlElement.classList.contains("dark");
+    const sunIcon = themeToggle.querySelector(".fa-sun");
+    const moonIcon = themeToggle.querySelector(".fa-moon");
+    
+    if (isDarkMode) {
+      sunIcon.style.opacity = "1";
+      sunIcon.style.transform = "translateY(0)";
+      moonIcon.style.opacity = "0";
+      moonIcon.style.transform = "translateY(-20px)";
+    } else {
+      sunIcon.style.opacity = "0";
+      sunIcon.style.transform = "translateY(20px)";
+      moonIcon.style.opacity = "1";
+      moonIcon.style.transform = "translateY(0)";
+    }
+  }
+
   // Mobile Menu Toggle
   const menuIcon = document.getElementById("menu-icon");
   const navLinks = document.querySelector(".nav-links");
@@ -30,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Cursor effects on hover
-  const hoverElements = document.querySelectorAll("a, button, .btn, .project-card, .skill-item, .timeline-content");
+  const hoverElements = document.querySelectorAll("a, button, .btn, .project-card, .skill-item, .timeline-content, .theme-toggle");
   
   hoverElements.forEach(element => {
     element.addEventListener("mouseenter", () => {
